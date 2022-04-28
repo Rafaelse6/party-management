@@ -4,14 +4,48 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width" />
-	<title>Lista de Convidados</title>
+
+	<title>Guests List</title>
+
 	<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
 	<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" />
 </head>
 
 <body>
-	<h1>Olá!</h1>
-	
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Guests List</h1>
+		</div>
+
+		<div class="panel-body">
+			<form class="form-inline" method="POST" th:action="@{/guests}" th:object="${guest}" style="margin: 20px 0">
+				<div class="form-group">
+					<input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Name" /> <input
+						type="text" class="form-control" id="companionAmount" th:field="*{companionAmount}"
+						placeholder="Companion" />
+
+					<button type="submit" class="btn btn-primary">Add</button>
+				</div>
+			</form>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Companion</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="guest : ${guests}">
+						<td th:text="${guest.name}"></td>
+						<td th:text="${guest.companionAmount}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
 	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
